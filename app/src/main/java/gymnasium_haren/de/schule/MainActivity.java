@@ -61,6 +61,7 @@ public class MainActivity extends ActionBarActivity
         WebView.getSettings().setBuiltInZoomControls(true);
         WebView.setInitialScale(100);
         Pushbots.sharedInstance().init(this);
+        Pushbots.sharedInstance().setPushEnabled(true);
     }
 
     @Override
