@@ -22,6 +22,8 @@ import android.webkit.WebViewClient;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.pushbots.push.Pushbots;
+
 
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -58,7 +60,7 @@ public class MainActivity extends ActionBarActivity
         WebView.setWebViewClient(new MyWebViewClient());
         WebView.getSettings().setBuiltInZoomControls(true);
         WebView.setInitialScale(100);
-
+        Pushbots.sharedInstance().init(this);
     }
 
     @Override
