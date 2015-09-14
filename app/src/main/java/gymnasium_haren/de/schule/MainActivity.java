@@ -1,4 +1,5 @@
 package gymnasium_haren.de.schule;
+ import com.pushbots.push.Pushbots;
 
 import android.app.Activity;
 import android.support.v7.app.ActionBarActivity;
@@ -22,7 +23,7 @@ import android.webkit.WebViewClient;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.pushbots.push.Pushbots;
+
 
 
 public class MainActivity extends ActionBarActivity
@@ -61,7 +62,6 @@ public class MainActivity extends ActionBarActivity
         WebView.getSettings().setBuiltInZoomControls(true);
         WebView.setInitialScale(100);
         Pushbots.sharedInstance().init(this);
-        Pushbots.sharedInstance().setPushEnabled(true);
     }
 
     @Override
@@ -183,6 +183,7 @@ public class MainActivity extends ActionBarActivity
             return true;
         }
         return super.onCreateOptionsMenu(menu);
+
     }
 
     /**

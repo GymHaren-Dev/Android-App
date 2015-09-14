@@ -3,7 +3,7 @@
     <!-- Pushbots Application ID  -->
     <string name="pb_appid">55a68709177959c94e8b456c</string>
     <!-- GCM Sender ID -->
-    <string name="pb_senderid">ed8615eed271619ff99ab2f52b62d57a</string>
+    <string name="pb_senderid">676879512720</string>
     <!-- Pushbots Log Level  log Tag "PB2" -->
     <string name="pb_logLevel">DEBUG</string>
 </resources>

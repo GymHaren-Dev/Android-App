@@ -22,6 +22,8 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:22.0.0'
-    compile 'com.pushbots:pushbots-lib:2.0.13@aar'
+    
     compile 'com.android.support:support-v4:21.0.0'
+
+compile 'com.pushbots:pushbots-lib:+@aar'
 }
