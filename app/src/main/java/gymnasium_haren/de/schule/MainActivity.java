@@ -107,7 +107,7 @@ public class MainActivity extends ActionBarActivity
                 break;
             case 6:
                 mTitle = "Pressespiegel";
-                WebView.loadUrl("https://gymharen.wordpress.com/");
+                WebView.loadUrl("http://nibis.ni.schule.de/~gymharen/pressespiegel/14_15_pressespiegel");
                 break;
             case 7:
                 mTitle = "Fächer";
