@@ -139,7 +139,7 @@ public class MainActivity extends ActionBarActivity
                 break;
             case 14:
                 mTitle = "Kollegium";
-                WebView.loadUrl("http://fs2.directupload.net/images/150629/fxph5jda.png");
+                WebView.loadUrl("http://nibis.ni.schule.de/~gymharen/Kollegium/kollegium.htm");
                 break;
             case 15:
                 mTitle = "Partnerschulen";
