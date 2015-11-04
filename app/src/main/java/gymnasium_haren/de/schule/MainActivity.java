@@ -87,7 +87,7 @@ public class MainActivity extends ActionBarActivity
         switch (number) {
             case 1:
                 mTitle = "Vertretungsplan";
-                WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/vertretungsplan/Schueler/subst_001.htm");
+                WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/vertretungsplan/Schueler/f2/subst_001.htm");
                 break;
             case 2:
                 mTitle = "Stundenplan";
