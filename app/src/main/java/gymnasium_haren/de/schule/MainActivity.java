@@ -21,7 +21,8 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ArrayAdapter;
-import android.widget.TextView;
+ import android.widget.Spinner;
+ import android.widget.TextView;
 
 
 
@@ -83,7 +84,7 @@ public class MainActivity extends ActionBarActivity
     }
 
     public void onSectionAttached(int number) {
-
+        float dpi = getResources().getDisplayMetrics().density;
         switch (number) {
             case 1:
                 mTitle = "Vertretungsplan";
@@ -91,6 +92,7 @@ public class MainActivity extends ActionBarActivity
                 break;
             case 2:
                 mTitle = "Stundenplan";
+                WebView.setInitialScale((int) dpi * 100);
                 WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/default.htm");
                 break;
             case 3:
@@ -147,6 +149,7 @@ public class MainActivity extends ActionBarActivity
                 break;
             case 16:
                 mTitle = "Mensa";
+                WebView.setInitialScale((int) dpi * 100);
                 WebView.loadUrl("https://d.maxfile.ro/mdumuxrjup.html");
                 break;
             case 17:
