@@ -2,7 +2,8 @@ package gymnasium_haren.de.schule;
  import com.pushbots.push.Pushbots;
 
 import android.app.Activity;
-import android.support.v7.app.ActionBarActivity;
+ import android.support.v4.view.ViewCompat;
+ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -13,7 +14,8 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
+ import android.view.Surface;
+ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.webkit.HttpAuthHandler;
@@ -23,8 +25,6 @@ import android.webkit.WebViewClient;
 import android.widget.ArrayAdapter;
  import android.widget.Spinner;
  import android.widget.TextView;
-
-
 
 
 public class MainActivity extends ActionBarActivity
@@ -61,8 +61,11 @@ public class MainActivity extends ActionBarActivity
         //Weiterleitungen in App �ffnen
         WebView.setWebViewClient(new MyWebViewClient());
         WebView.getSettings().setBuiltInZoomControls(true);
-        WebView.setInitialScale(100);
+        float dpi = getResources().getDisplayMetrics().density;
+        WebView.setInitialScale((int) dpi * 100);
+        // WebView.setInitialScale(100);
         Pushbots.sharedInstance().init(this);
+
     }
 
     @Override
@@ -84,15 +87,32 @@ public class MainActivity extends ActionBarActivity
     }
 
     public void onSectionAttached(int number) {
-        float dpi = getResources().getDisplayMetrics().density;
+        int rotation = getWindowManager().getDefaultDisplay()
+                .getRotation();
         switch (number) {
             case 1:
                 mTitle = "Vertretungsplan";
-                WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/vertretungsplan/Schueler/f2/subst_001.htm");
+                switch (rotation) {
+                    case Surface.ROTATION_0:
+                        WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/vertretungsplan/Schueler/f2/subst_001.htm");
+                        break;
+                    case Surface.ROTATION_90:
+                        WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/vertretungsplan/Schueler/subst_001.htm");
+                        break;
+                    case Surface.ROTATION_180:
+                        WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/vertretungsplan/Schueler/f2/subst_001.htm");
+                        break;
+                    case Surface.ROTATION_270:
+                        WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/vertretungsplan/Schueler/subst_001.htm");
+                        break;
+                    default:
+                        WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/vertretungsplan/Schueler/subst_001.htm");
+                        break;
+                }
+
                 break;
             case 2:
                 mTitle = "Stundenplan";
-                WebView.setInitialScale((int) dpi * 100);
                 WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/default.htm");
                 break;
             case 3:
@@ -149,7 +169,6 @@ public class MainActivity extends ActionBarActivity
                 break;
             case 16:
                 mTitle = "Mensa";
-                WebView.setInitialScale((int) dpi * 100);
                 WebView.loadUrl("https://d.maxfile.ro/mdumuxrjup.html");
                 break;
             case 17:
@@ -166,6 +185,7 @@ public class MainActivity extends ActionBarActivity
                 break;
         }
     }
+
 
     public void restoreActionBar() {
         ActionBar actionBar = getSupportActionBar();
@@ -240,3 +260,4 @@ class MyWebViewClient extends WebViewClient {
 
     }
 }
+
