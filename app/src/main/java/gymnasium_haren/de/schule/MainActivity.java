@@ -25,6 +25,11 @@ import android.webkit.WebViewClient;
 import android.widget.ArrayAdapter;
  import android.widget.Spinner;
  import android.widget.TextView;
+ import android.widget.Toast;
+
+ import java.io.*;
+ import java.net.*;
+ import java.util.*;
 
 
 public class MainActivity extends ActionBarActivity
@@ -65,7 +70,22 @@ public class MainActivity extends ActionBarActivity
         WebView.setInitialScale((int) dpi * 100);
         // WebView.setInitialScale(100);
         Pushbots.sharedInstance().init(this);
+        WebView.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);
+        /**test meinScanner = new test();
+        String klasse = "5c";
+        String datum = "20.11.";
+        String quellcode = meinScanner.fetchPage("http://www.nibis.ni.schule.de/~gymharen/verwaltung/vertretungsplan/Schueler/f2/subst_001.htm"); //Hier die Adresse eingeben und du hast den Quellcode in einer Variablen
+        int anfang = quellcode.indexOf(klasse);
+        int ende = quellcode.indexOf("</td><td class=");
+        //Jetzt hole den String aus dem Quellcode
+        String gesuchterText = quellcode.substring(anfang+94, ende);
+        Context context = getApplicationContext();
+        CharSequence text = "Die Klasse "+klasse+" hat in der "+gesuchterText+" Vertretung/Entfall.";
+        int duration = Toast.LENGTH_SHORT;
 
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+         */
     }
 
     @Override
@@ -261,3 +281,22 @@ class MyWebViewClient extends WebViewClient {
     }
 }
 
+/**class test {
+    public String fetchPage(String url) {
+        StringBuilder sb = new StringBuilder();
+
+        try {
+            Scanner scanner = new Scanner(new URL(url).openStream());
+            while (scanner.hasNextLine()) {
+                sb.append(scanner.nextLine() + "\n");
+
+            }
+            scanner.close();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return sb.toString();
+    } // fetchPage
+}*/
