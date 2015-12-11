@@ -1,5 +1,6 @@
 ﻿# Android-App
 Android App für Schüler des Gymnasiums Haren
+
 Diese App ist im Beta-Status.
 
 Es ist möglich, den Quellcode mit dem Befehl 
