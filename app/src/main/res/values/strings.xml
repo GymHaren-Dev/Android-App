@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Gymnasium Haren</string>
 
-    <string name="title_section1">Vetretungsplan</string>
+    <string name="title_section1">Vertretungsplan</string>
     <string name="title_section2">Stundenplan</string>
     <string name="title_section3">Schulausfälle</string>
     <string name="title_section4">Termine</string>
@@ -26,5 +26,28 @@
 
     <string name="action_example"></string>
 
-    <string name="action_settings"></string>
+    <string name="action_settings">Einstellungen</string>
+    <string name="title_activity_einstellungen">Einstellungen</string>
+    <string name="preference_class">Klasse (Zahl und Kleinbuchstabe, z.B. "10d")</string>
+    <string name="preference_class_key">class</string>
+    <string name="preference_class_default" />
+    <string name="preference_benutzer">Benutzername  (für Pläne)</string>
+    <string name="preference_benutzer_key">user</string>
+    <string name="preference_benutzer_default">student</string>
+    <string name="preference_pass">Passwort (für Pläne)</string>
+    <string name="preference_pass_key">pass</string>
+    <string name="preference_pass_default" />
+    <string name="preference_lehrermodus_title">Lehrermodus</string>
+    <string name="preference_lehreremodus_key">lehrer</string>
+    <string name="preference_indizemodus_summary">(für die Pläne)</string>
+    <string name="preference_push_title">Push-Nachrichten</string>
+    <string name="preference_push_key">push</string>
+    <string name="preference_push_summary">Sollen Push-Nachrichten empfangen werden?</string>
+    <string name="preference_pushd_title">Entwicklunger Tag</string>
+    <string name="preference_pushd_key">pushd</string>
+    <string name="preference_pushd_summary">Entwickler Tag hinzufügen für Push-Nachrichten?</string>
+    <string name="allgemeine_preferences">Allgemeine Einstellungen</string>
+    <string name="anmelde_preferences">Anmeldeinformationen</string>
+    <string name="title_screen_preference">Anmeldeinformationen</string>
+    <string name="summary_screen_preference">Hier werden die Anmeldeinformationen festgelegt</string>
 </resources>

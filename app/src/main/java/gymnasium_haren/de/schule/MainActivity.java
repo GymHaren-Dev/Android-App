@@ -2,6 +2,9 @@ package gymnasium_haren.de.schule;
  import com.pushbots.push.Pushbots;
 
 import android.app.Activity;
+ import android.content.Intent;
+ import android.content.SharedPreferences;
+ import android.preference.PreferenceManager;
  import android.support.v4.view.ViewCompat;
  import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
@@ -31,9 +34,14 @@ import android.widget.ArrayAdapter;
  import java.net.*;
  import java.util.*;
 
+ import static android.app.PendingIntent.getActivities;
+ import static android.app.PendingIntent.getActivity;
+ import static gymnasium_haren.de.schule.MainActivity.*;
+
 
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -45,9 +53,13 @@ public class MainActivity extends ActionBarActivity
      */
     private CharSequence mTitle;
     private WebView WebView;
+    public MyWebViewClient Webcl;
+    
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -64,13 +76,15 @@ public class MainActivity extends ActionBarActivity
         WebSettings webSettings = WebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         //Weiterleitungen in App �ffnen
-        WebView.setWebViewClient(new MyWebViewClient());
+        Webcl =new MyWebViewClient();
+        WebView.setWebViewClient(Webcl);
+        Webcl.MyWebViewClient2(User(), Password());
         WebView.getSettings().setBuiltInZoomControls(true);
         float dpi = getResources().getDisplayMetrics().density;
         WebView.setInitialScale((int) dpi * 100);
-        // WebView.setInitialScale(100);
         Pushbots.sharedInstance().init(this);
         WebView.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);
+
         /**test meinScanner = new test();
         String klasse = "5c";
         String datum = "20.11.";
@@ -86,6 +100,25 @@ public class MainActivity extends ActionBarActivity
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
          */
+        // Auslesen der ausgewählten Klasse aus den SharedPreferences
+        SharedPreferences sPrefs = PreferenceManager.getDefaultSharedPreferences(getApplication());
+        Pushbots.sharedInstance().tag(Klasse());
+        Pushbots.sharedInstance().tag("Beta-1");
+
+        String prefPushKey = getString(R.string.preference_push_key);
+        Boolean push = sPrefs.getBoolean(prefPushKey, true);
+        if (push == true){
+            Pushbots.sharedInstance().setPushEnabled(true);
+        } if (push == false){
+            Pushbots.sharedInstance().setPushEnabled(false);
+        }
+        String prefpushdKey = getString(R.string.preference_pushd_key);
+        Boolean pushd = sPrefs.getBoolean(prefpushdKey, true);
+        if (pushd == true){
+            Pushbots.sharedInstance().tag("dev");
+        } if (pushd == false){
+            Pushbots.sharedInstance().untag("dev");
+        }
     }
 
     @Override
@@ -104,36 +137,150 @@ public class MainActivity extends ActionBarActivity
         } else {
             super.onBackPressed();
         }
+
     }
 
     public void onSectionAttached(int number) {
+        if(Webcl != null){
+
+            Webcl.MyWebViewClient2(User(), Password());
+        }
         int rotation = getWindowManager().getDefaultDisplay()
                 .getRotation();
+
         switch (number) {
             case 1:
                 mTitle = "Vertretungsplan";
                 switch (rotation) {
                     case Surface.ROTATION_0:
-                        WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/vertretungsplan/Schueler/f2/subst_001.htm");
-                        break;
+                        if (!Modus()) {
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/vertretungsplan/Schueler/f2/subst_001.htm");
+                        } else {
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/vertretungsplan/Lehrer/f2/subst_001.htm");
+                        } break;
                     case Surface.ROTATION_90:
-                        WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/vertretungsplan/Schueler/subst_001.htm");
-                        break;
+                        if (!Modus()) {
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/vertretungsplan/Schueler/subst_001.htm");
+                        } else {
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/vertretungsplan/Lehrer/subst_001.htm");
+                        } break;
                     case Surface.ROTATION_180:
-                        WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/vertretungsplan/Schueler/f2/subst_001.htm");
-                        break;
+                        if (!Modus()) {
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/vertretungsplan/Schueler/f2/subst_001.htm");
+                        } else {
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/vertretungsplan/Lehrer/f2/subst_001.htm");
+                        } break;
                     case Surface.ROTATION_270:
-                        WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/vertretungsplan/Schueler/subst_001.htm");
-                        break;
+                        if (!Modus()) {
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/vertretungsplan/Schueler/subst_001.htm");
+                        } else {
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/vertretungsplan/Lehrer/subst_001.htm");
+                        } break;
                     default:
-                        WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/vertretungsplan/Schueler/subst_001.htm");
-                        break;
+                        if (!Modus()) {
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/vertretungsplan/Schueler/subst_001.htm");
+                        } else {
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/vertretungsplan/Lehrer/subst_001.htm");
+                        } break;
                 }
 
                 break;
             case 2:
                 mTitle = "Stundenplan";
-                WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/default.htm");
+                if (!Modus()) {
+                    switch(Klasse()){
+                        case "5a":
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/39/c00001.htm");
+                            break;
+                        case "5b":
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/39/c00002.htm");
+                            break;
+                        case "5c":
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/39/c00003.htm");
+                            break;
+                        case "5d":
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/39/c00004.htm");
+                            break;
+                        case "6a":
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/39/c00005.htm");
+                            break;
+                        case "6b":
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/39/c00006.htm");
+                            break;
+                        case "6c":
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/39/c00007.htm");
+                            break;
+                        case "7a":
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/39/c00008.htm");
+                            break;
+                        case "7b":
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/39/c00009.htm");
+                            break;
+                        case "7c":
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/39/c00010.htm");
+                            break;
+                        case "7d":
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/39/c00011.htm");
+                            break;
+                        case "8a":
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/39/c00012.htm");
+                            break;
+                        case "8b":
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/39/c00013.htm");
+                            break;
+                        case "8c":
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/39/c00014.htm");
+                            break;
+                        case "8d":
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/39/c00015.htm");
+                            break;
+                        case "9a":
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/39/c00016.htm");
+                            break;
+                        case "9b":
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/39/c00017.htm");
+                            break;
+                        case "9c":
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/39/c00018.htm");
+                            break;
+                        case "9d":
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/39/c00019.htm");
+                            break;
+                        case "10a":
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/39/c00020.htm");
+                            break;
+                        case "10b":
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/39/c00021.htm");
+                            break;
+                        case "10c":
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/39/c00022.htm");
+                            break;
+                        case "10d":
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/39/c00023.htm");
+                            break;
+                        case "11":
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/39/c00024.htm");
+                            break;
+                        case "12a1":
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/39/c00025.htm");
+                            break;
+                        case "12a2":
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/39/c00026.htm");
+                            break;
+                        case "12b":
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/39/c00027.htm");
+                            break;
+                        case "12c":
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/39/c00028.htm");
+                            break;
+                        default:
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/default.htm");
+                            break;
+                    }
+
+                }else {
+                    WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Lehrerplan/default.htm");
+                }
                 break;
             case 3:
                 mTitle = "Schulausfälle";
@@ -228,6 +375,21 @@ public class MainActivity extends ActionBarActivity
         return super.onCreateOptionsMenu(menu);
 
     }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            startActivity(new Intent(this, EinstellungenActivity.class));
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
     /**
      * A placeholder fragment containing a simple view.
@@ -269,16 +431,60 @@ public class MainActivity extends ActionBarActivity
         }
 
     }
+    String Klasse(){
+        SharedPreferences ksPrefs = PreferenceManager.getDefaultSharedPreferences(getApplication());
+        String prefKlasseKey = getString(R.string.preference_class_key);
+        String prefKlasseDefault = getString(R.string.preference_class_default);
+        String Klasse = ksPrefs.getString(prefKlasseKey, prefKlasseDefault);
+        return Klasse;
+    }
+    String User(){
+        SharedPreferences usPrefs = PreferenceManager.getDefaultSharedPreferences(getApplication());
+        String prefBenutzerKey = getString(R.string.preference_benutzer_key);
+        String prefBenutzerDefault = getString(R.string.preference_benutzer_default);
+        String Benutzer = usPrefs.getString(prefBenutzerKey, prefBenutzerDefault);
+        return Benutzer;
+    }
+    String Password(){
+        SharedPreferences psPrefs = PreferenceManager.getDefaultSharedPreferences(getApplication());
+        String prefPassKey = getString(R.string.preference_pass_key);
+        String prefPassDefault = getString(R.string.preference_pass_default);
+        String Pass = psPrefs.getString(prefPassKey, prefPassDefault);
+        return Pass;
+    }
+    boolean Modus() {
+        // Auslesen des Anzeige-Modus aus den SharedPreferences
+        SharedPreferences msPrefs = PreferenceManager.getDefaultSharedPreferences(getApplication());
+        String prefLehrermodusKey = getString(R.string.preference_lehreremodus_key);
+        Boolean lehrermodus = msPrefs.getBoolean(prefLehrermodusKey, false);
+        return lehrermodus;
+
+    }
+
+
+
+
+
 
 }
+
 class MyWebViewClient extends WebViewClient {
+    public String Jorg;
+    public String Pasjorg;
+    public void MyWebViewClient2(String user, String password) {
+        Jorg = user;
+        Pasjorg =password;
+    }
+
+    //MainActivity test = new MainActivity();
     @Override
     public void onReceivedHttpAuthRequest(WebView view,
                                           HttpAuthHandler handler, String host, String realm) {
 
-        handler.proceed("student", "sTu2411");
+        handler.proceed(Jorg , Pasjorg);
 
     }
+
 }
 
 /**class test {
