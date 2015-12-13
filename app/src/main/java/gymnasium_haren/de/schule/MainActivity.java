@@ -119,6 +119,10 @@ public class MainActivity extends ActionBarActivity
         } if (pushd == false){
             Pushbots.sharedInstance().untag("dev");
         }
+        if (Password() == ""){
+            Toast toast = Toast.makeText(getApplicationContext(), "Bitte Einstellungen oben rechts überprüfen!", Toast.LENGTH_LONG);
+            toast.show();
+        }
     }
 
     @Override
@@ -287,66 +291,70 @@ public class MainActivity extends ActionBarActivity
                 WebView.loadUrl("http://www.vmz-niedersachsen.de/aktuell/schulausfall.php");
                 break;
             case 4:
+                mTitle = "Hauptseite";
+                WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/home/willkommen.htm");
+                break;
+            case 5:
                 mTitle = "Termine";
                 WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/termine/termine.htm");
                 break;
-            case 5:
+            case 6:
                 mTitle = "Verwaltung";
                 WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/verwaltung.htm");
                 break;
-            case 6:
-                mTitle = "Pressespiegel";
-                WebView.loadUrl("http://nibis.ni.schule.de/~gymharen/pressespiegel/14_15_pressespiegel");
-                break;
             case 7:
+                mTitle = "Pressespiegel";
+                WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/pressespiegel/15_16_pressespiegel.htm");
+                break;
+            case 8:
                 mTitle = "Fächer";
                 WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/Faecher/faecher-start.htm");
                 break;
-            case 8:
+            case 9:
                 mTitle = "Soziales Lernen";
                 WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/soziales_lernen/soziales_lernen.htm");
                 break;
-            case 9:
+            case 10:
                 mTitle = "AGs";
                 WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/arbeitsgemeinschaften/arbeitsgemeinschaften.htm");
                 break;
-            case 10:
+            case 11:
                 mTitle = "Schüler";
                 WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/Schueler/startseite/aktuelles.htm");
                 break;
-            case 11:
+            case 12:
                 mTitle = "Berufs- und Studienorientierung";
                 WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/berufs-und_studienorientierung/start.htm");
                 break;
-            case 12:
+            case 13:
                 mTitle = "Eltern";
                 WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/Eltern/eltern.htm");
                 break;
-            case 13:
+            case 14:
                 mTitle = "Grundschuleltern";
                 WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/eltern_grundschule/eltern_grundschule.htm");
                 break;
-            case 14:
+            case 15:
                 mTitle = "Kollegium";
                 WebView.loadUrl("http://nibis.ni.schule.de/~gymharen/Kollegium/kollegium.htm");
                 break;
-            case 15:
+            case 16:
                 mTitle = "Partnerschulen";
                 WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/partnerschulen/partnerschulen.htm");
                 break;
-            case 16:
+            case 17:
                 mTitle = "Mensa";
                 WebView.loadUrl("https://d.maxfile.ro/mdumuxrjup.html");
                 break;
-            case 17:
+            case 18:
                 mTitle = "Förderverein";
                 WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/foerderverein/foerderverein.htm");
                 break;
-            case 18:
+            case 19:
                 mTitle = "Links";
                 WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/Links/links.htm");
                 break;
-            case 19:
+            case 20:
                 mTitle = "Über diese App";
                 WebView.loadUrl("http://gymharen-dev.github.io/Android-App/");
                 break;
@@ -469,11 +477,11 @@ public class MainActivity extends ActionBarActivity
 }
 
 class MyWebViewClient extends WebViewClient {
-    public String Jorg;
-    public String Pasjorg;
+    public String Username;
+    public String Password;
     public void MyWebViewClient2(String user, String password) {
-        Jorg = user;
-        Pasjorg =password;
+        Username = user;
+        Password =password;
     }
 
     //MainActivity test = new MainActivity();
@@ -481,7 +489,7 @@ class MyWebViewClient extends WebViewClient {
     public void onReceivedHttpAuthRequest(WebView view,
                                           HttpAuthHandler handler, String host, String realm) {
 
-        handler.proceed(Jorg , Pasjorg);
+        handler.proceed(Username , Password);
 
     }
 
