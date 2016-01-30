@@ -103,7 +103,10 @@ public class MainActivity extends ActionBarActivity
         // Auslesen der ausgewählten Klasse aus den SharedPreferences
         SharedPreferences sPrefs = PreferenceManager.getDefaultSharedPreferences(getApplication());
         Pushbots.sharedInstance().tag(Klasse());
-        Pushbots.sharedInstance().tag("Beta-1");
+        Pushbots.sharedInstance().tag("Beta-2");
+        Pushbots.sharedInstance().untag("Beta-1");
+        Pushbots.sharedInstance().untag("dev");
+
 
         String prefPushKey = getString(R.string.preference_push_key);
         Boolean push = sPrefs.getBoolean(prefPushKey, true);
@@ -113,12 +116,12 @@ public class MainActivity extends ActionBarActivity
             Pushbots.sharedInstance().setPushEnabled(false);
         }
         String prefpushdKey = getString(R.string.preference_pushd_key);
-        Boolean pushd = sPrefs.getBoolean(prefpushdKey, true);
+        /**Boolean pushd = sPrefs.getBoolean(prefpushdKey, true);
         if (pushd == true){
             Pushbots.sharedInstance().tag("dev");
         } if (pushd == false){
             Pushbots.sharedInstance().untag("dev");
-        }
+        }**/
         if (Password() == ""){
             Toast toast = Toast.makeText(getApplicationContext(), "Bitte Einstellungen oben rechts überprüfen!", Toast.LENGTH_LONG);
             toast.show();
@@ -194,88 +197,88 @@ public class MainActivity extends ActionBarActivity
                 if (!Modus()) {
                     switch(Klasse()){
                         case "5a":
-                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/39/c00001.htm");
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/P3/c00001.htm");
                             break;
                         case "5b":
-                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/39/c00002.htm");
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/P3/c00002.htm");
                             break;
                         case "5c":
-                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/39/c00003.htm");
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/P3/c00003.htm");
                             break;
                         case "5d":
-                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/39/c00004.htm");
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/P3/c00004.htm");
                             break;
                         case "6a":
-                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/39/c00005.htm");
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/P3/c00005.htm");
                             break;
                         case "6b":
-                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/39/c00006.htm");
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/P3/c00006.htm");
                             break;
                         case "6c":
-                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/39/c00007.htm");
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/P3/c00007.htm");
                             break;
                         case "7a":
-                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/39/c00008.htm");
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/P3/c00008.htm");
                             break;
                         case "7b":
-                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/39/c00009.htm");
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/P3/c00009.htm");
                             break;
                         case "7c":
-                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/39/c00010.htm");
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/P3/c00010.htm");
                             break;
                         case "7d":
-                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/39/c00011.htm");
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/P3/c00011.htm");
                             break;
                         case "8a":
-                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/39/c00012.htm");
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/P3/c00012.htm");
                             break;
                         case "8b":
-                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/39/c00013.htm");
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/P3/c00013.htm");
                             break;
                         case "8c":
-                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/39/c00014.htm");
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/P3/c00014.htm");
                             break;
                         case "8d":
-                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/39/c00015.htm");
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/P3/c00015.htm");
                             break;
                         case "9a":
-                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/39/c00016.htm");
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/P3/c00016.htm");
                             break;
                         case "9b":
-                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/39/c00017.htm");
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/P3/c00017.htm");
                             break;
                         case "9c":
-                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/39/c00018.htm");
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/P3/c00018.htm");
                             break;
                         case "9d":
-                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/39/c00019.htm");
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/P3/c00019.htm");
                             break;
                         case "10a":
-                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/39/c00020.htm");
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/P3/c00020.htm");
                             break;
                         case "10b":
-                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/39/c00021.htm");
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/P3/c00021.htm");
                             break;
                         case "10c":
-                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/39/c00022.htm");
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/P3/c00022.htm");
                             break;
                         case "10d":
-                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/39/c00023.htm");
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/P3/c00023.htm");
                             break;
                         case "11":
-                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/39/c00024.htm");
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/P3/c00024.htm");
                             break;
                         case "12a1":
-                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/39/c00025.htm");
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/P3/c00025.htm");
                             break;
                         case "12a2":
-                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/39/c00026.htm");
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/P3/c00026.htm");
                             break;
                         case "12b":
-                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/39/c00027.htm");
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/P3/c00027.htm");
                             break;
                         case "12c":
-                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/39/c00028.htm");
+                            WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/c/P3/c00028.htm");
                             break;
                         default:
                             WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/verwaltung/stundenplan/Klassenplan/default.htm");
