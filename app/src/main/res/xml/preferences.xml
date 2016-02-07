@@ -23,9 +23,8 @@
             android:key="pref_static_field_key"
             android:selectable="false"
             android:persistent="false"
-            android:title="Version"
-            android:summary="Die installierte Version ist Beta2"/>
-
+            android:title="Version: Beta-3"
+            android:summary="Die installierte Version ist Beta-3"/>
     </PreferenceCategory>
     <PreferenceCategory
         android:title="@string/anmelde_preferences">

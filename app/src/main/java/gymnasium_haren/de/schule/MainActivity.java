@@ -2,9 +2,12 @@ package gymnasium_haren.de.schule;
  import com.pushbots.push.Pushbots;
 
 import android.app.Activity;
+ import android.app.NotificationManager;
  import android.content.Intent;
  import android.content.SharedPreferences;
+ import android.net.Uri;
  import android.preference.PreferenceManager;
+ import android.support.v4.app.NotificationCompat;
  import android.support.v4.view.ViewCompat;
  import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
@@ -54,7 +57,9 @@ public class MainActivity extends ActionBarActivity
     private CharSequence mTitle;
     private WebView WebView;
     public MyWebViewClient Webcl;
-    
+
+    NotificationManager notManag;
+    int notID = 1;
 
 
     @Override
@@ -103,11 +108,11 @@ public class MainActivity extends ActionBarActivity
         // Auslesen der ausgewählten Klasse aus den SharedPreferences
         SharedPreferences sPrefs = PreferenceManager.getDefaultSharedPreferences(getApplication());
         Pushbots.sharedInstance().tag(Klasse());
-        Pushbots.sharedInstance().tag("Beta-2");
+        Pushbots.sharedInstance().tag("Beta-3");
+        Pushbots.sharedInstance().untag("Beta-2");
         Pushbots.sharedInstance().untag("Beta-1");
         Pushbots.sharedInstance().untag("dev");
-
-
+        // Einstellung zum Ein- oder Ausschalten des Empfangens von Push-Nachrichten via Pushbots
         String prefPushKey = getString(R.string.preference_push_key);
         Boolean push = sPrefs.getBoolean(prefPushKey, true);
         if (push == true){
@@ -115,19 +120,24 @@ public class MainActivity extends ActionBarActivity
         } if (push == false){
             Pushbots.sharedInstance().setPushEnabled(false);
         }
-        String prefpushdKey = getString(R.string.preference_pushd_key);
-        /**Boolean pushd = sPrefs.getBoolean(prefpushdKey, true);
+       /** String prefpushdKey = getString(R.string.preference_pushd_key);
+        Boolean pushd = sPrefs.getBoolean(prefpushdKey, true);
         if (pushd == true){
             Pushbots.sharedInstance().tag("dev");
         } if (pushd == false){
             Pushbots.sharedInstance().untag("dev");
         }**/
         if (Password() == ""){
-            Toast toast = Toast.makeText(getApplicationContext(), "Bitte Einstellungen oben rechts überprüfen!", Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(this, "Bitte Einstellungen oben rechts überprüfen! Danach komplett beenden und neustarten!", Toast.LENGTH_SHORT);
             toast.show();
         }
-    }
+        String aInfo = Klasse() + "," + User() + "," + Password();
 
+        Intent intent = new Intent(this, GetWebString.class);
+        intent.setData(Uri.parse(aInfo));
+        startService(intent);
+        //GetWebString.onHandleIntent();
+    }
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
@@ -148,6 +158,9 @@ public class MainActivity extends ActionBarActivity
     }
 
     public void onSectionAttached(int number) {
+
+
+
         if(Webcl != null){
 
             Webcl.MyWebViewClient2(User(), Password());
@@ -296,7 +309,6 @@ public class MainActivity extends ActionBarActivity
             case 4:
                 mTitle = "Hauptseite";
                 WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/home/willkommen.htm");
-                break;
             case 5:
                 mTitle = "Termine";
                 WebView.loadUrl("http://www.nibis.ni.schule.de/~gymharen/termine/termine.htm");
@@ -480,11 +492,11 @@ public class MainActivity extends ActionBarActivity
 }
 
 class MyWebViewClient extends WebViewClient {
-    public String Username;
-    public String Password;
+    public String Jorg;
+    public String Pasjorg;
     public void MyWebViewClient2(String user, String password) {
-        Username = user;
-        Password =password;
+        Jorg = user;
+        Pasjorg =password;
     }
 
     //MainActivity test = new MainActivity();
@@ -492,7 +504,7 @@ class MyWebViewClient extends WebViewClient {
     public void onReceivedHttpAuthRequest(WebView view,
                                           HttpAuthHandler handler, String host, String realm) {
 
-        handler.proceed(Username , Password);
+        handler.proceed(Jorg , Pasjorg);
 
     }
 

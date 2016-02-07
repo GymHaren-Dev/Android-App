@@ -8,6 +8,7 @@
     <permission android:name="gymnasium_haren.de.schule.permission.C2D_MESSAGE" android:protectionLevel="signature" />
     <uses-permission android:name="gymnasium_haren.de.schule.C2D_MESSAGE" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:allowBackup="true"
@@ -47,6 +48,11 @@
         </receiver>
         <receiver android:name="com.pushbots.push.DefaultPushHandler" />
         <service android:name="com.pushbots.push.GCMIntentService" />
+        <service android:name=".GetWebString" android:label="Statusbar Notification" >
+            <intent-filter>
+                <action android:name="gymnasium_haren.de.schule.GetWebString" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

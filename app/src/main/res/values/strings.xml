@@ -44,12 +44,11 @@
     <string name="preference_push_title">Push-Nachrichten</string>
     <string name="preference_push_key">push</string>
     <string name="preference_push_summary">Sollen Push-Nachrichten empfangen werden?</string>
-    <string name="preference_pushd_title">Entwickler Tag</string>
+    <string name="preference_pushd_title">Entwicklunger Tag</string>
     <string name="preference_pushd_key">pushd</string>
     <string name="preference_pushd_summary">Entwickler Tag hinzufügen für Push-Nachrichten?</string>
     <string name="allgemeine_preferences">Allgemeine Einstellungen</string>
     <string name="anmelde_preferences">Anmeldeinformationen</string>
     <string name="title_screen_preference">Anmeldeinformationen</string>
     <string name="summary_screen_preference">Hier werden die Anmeldeinformationen festgelegt</string>
-    <string name="preference_version">version</string>
 </resources>
